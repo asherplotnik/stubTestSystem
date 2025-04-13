@@ -4,10 +4,12 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Aspect
 @Component
@@ -23,13 +25,37 @@ public class OutgoingCallInterceptor {
 
     @Around("execution(* org.springframework.web.client.RestTemplate.exchange(..))")
     public Object interceptCall(ProceedingJoinPoint joinPoint) throws Throwable {
-        List<Object> request = joinPoint.getArgs().length > 0 ? Arrays.asList(joinPoint.getArgs()) : null;
+        Object[] args = joinPoint.getArgs();
+
+        String url = args.length > 0 && args[0] instanceof String urlArgs? urlArgs : null;
+        String method = args.length > 1 ? args[1].toString() : null;
+        HttpEntity<?> requestEntity = args.length > 2 && args[2] instanceof HttpEntity ? (HttpEntity<?>) args[2] : null;
+        Object[] uriVariables = args.length > 4 ? Arrays.copyOfRange(args, 4, args.length) : new Object[0];
+
+        var interceptedRequestBuilder = InterceptedRequest.builder()
+                .url(url)
+                .method(method);
+        if(requestEntity != null) {
+            interceptedRequestBuilder
+                    .headers(requestEntity.getHeaders())
+                    .body(requestEntity.getBody());
+        }
+        InterceptedRequest interceptedRequest = interceptedRequestBuilder.uriVariables(uriVariables)
+           .timestamp(System.currentTimeMillis())
+           .build();
         Object response = null;
+        String responseBodyAsString = null;
         try {
             response = joinPoint.proceed();
             return response;
         } finally {
-            interceptionContext.addRecord(new RequestResponseRecord(request, response));
+            if(response instanceof ResponseEntity) {
+                Object body = ((ResponseEntity<?>) response).getBody();
+                responseBodyAsString = (body != null ? body.toString() : "null");
+            } else {
+                responseBodyAsString = String.valueOf(response);
+            }
+            interceptionContext.addRecord(new RequestResponseRecord(interceptedRequest, responseBodyAsString));
         }
     }
 

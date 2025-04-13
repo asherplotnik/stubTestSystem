@@ -3,19 +3,19 @@ package com.stuby.service.interceptor;
 import java.util.List;
 
 public class RequestResponseRecord {
-    private final List<Object> request;
-    private final Object response;
+    private final InterceptedRequest request;
+    private final String response;
 
-    public RequestResponseRecord(List<Object> request, Object response) {
+    public RequestResponseRecord(InterceptedRequest request, String response) {
         this.request = request;
         this.response = response;
     }
 
-    public Object getRequest() {
+    public InterceptedRequest getRequest() {
         return request;
     }
 
-    public Object getResponse() {
+    public String getResponse() {
         return response;
     }
 }

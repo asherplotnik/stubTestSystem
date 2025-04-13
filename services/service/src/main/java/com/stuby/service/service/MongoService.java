@@ -3,6 +3,8 @@ package com.stuby.service.service;
 import com.stuby.service.repository.MongoRepo;
 import com.stuby.service.repository.MyDocument;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class MongoService {
 
     private final MongoRepo mongoRepo;
+    private final Logger log = LoggerFactory.getLogger(MongoService.class);
 
     public MongoService(MongoRepo mongoRepo) {
         this.mongoRepo = mongoRepo;
