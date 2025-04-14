@@ -19,7 +19,7 @@ public class GetServicesService {
         this.kubernetesClient = kubernetesClient;
     }
 
-    public Map<String, List<RequestResponseRecord>> getServiceWithSampleRequests() {
+    public Map<String, List<RequestResponseRecord>> getServicesWithSampleRequests() {
         Map<String, List<RequestResponseRecord>> mapByServiceName = new HashMap<>();
         List<io.fabric8.kubernetes.api.model.Service> services = kubernetesClient.services().inNamespace("default").list().getItems();
 

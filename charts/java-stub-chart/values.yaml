@@ -11,7 +11,10 @@ image:
   # This sets the pull policy for images.
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.0.9"
+  tag: "0.0.11"
+
+mongo:
+  uri: mongodb://app:apppass123@bitnami-mongodb:27017/testStubSystem?authSource=admin
 
 # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets: []

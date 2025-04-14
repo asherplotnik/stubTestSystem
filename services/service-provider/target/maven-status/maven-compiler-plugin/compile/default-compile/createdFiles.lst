@@ -1,0 +1,8 @@
+com\stuby\service\service\DemoService.class
+com\stuby\service\service\MongoService.class
+com\stuby\service\controllers\DemoController.class
+com\stuby\service\repository\MyDocument$MyDocumentBuilder.class
+com\stuby\service\config\RestTemplateConfig.class
+com\stuby\service\repository\MyDocument.class
+com\stuby\service\repository\MongoRepo.class
+com\stuby\service\ServiceApplication.class

@@ -19,7 +19,7 @@ public class DemoController {
     }
 
     @GetMapping("/call")
-    public String getMessage(@RequestHeader("X-IDB-TransactionID") String transID) {
+    public String getMessage(@RequestHeader("testStubID") String transID) {
         return demoService.useService(transID);
     }
 

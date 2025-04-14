@@ -1,29 +1,22 @@
 package com.stuby.stubpod.controller;
 
-import com.stuby.stubpod.service.TestRequestHandler;
+import com.stuby.stubpod.service.FetchStubResponseService;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class StubController {
 
-    private final TestRequestHandler handler;
+    private final FetchStubResponseService service;
 
-    public StubController(TestRequestHandler handler) {
-        this.handler = handler;
+    public StubController(FetchStubResponseService service) {
+        this.service = service;
     }
 
-
-    @RequestMapping("/**")
-    public String catchAll(HttpServletRequest request) {
-
-        return handler.handleTestRequest(request);
+    @RequestMapping("/{path:.*stub.*}")
+    public String testRequest(HttpServletRequest request) {
+        return service.fetchStubResponse(request);
     }
 
-    @GetMapping("/stub")
-    public String getStub() {
-        return "{\"data\": \"this is a stub\"}";
-    }
 }

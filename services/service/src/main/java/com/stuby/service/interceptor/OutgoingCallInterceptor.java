@@ -5,7 +5,6 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -31,18 +30,17 @@ public class OutgoingCallInterceptor {
         String method = args.length > 1 ? args[1].toString() : null;
         HttpEntity<?> requestEntity = args.length > 2 && args[2] instanceof HttpEntity ? (HttpEntity<?>) args[2] : null;
         Object[] uriVariables = args.length > 4 ? Arrays.copyOfRange(args, 4, args.length) : new Object[0];
-
-        var interceptedRequestBuilder = InterceptedRequest.builder()
-                .url(url)
-                .method(method);
-        if(requestEntity != null) {
-            interceptedRequestBuilder
-                    .headers(requestEntity.getHeaders())
-                    .body(requestEntity.getBody());
+        if (!validTestRequest(requestEntity)) {
+            return joinPoint.proceed();
         }
-        InterceptedRequest interceptedRequest = interceptedRequestBuilder.uriVariables(uriVariables)
-           .timestamp(System.currentTimeMillis())
-           .build();
+        var interceptedRequest = InterceptedRequest.builder()
+                .url(url)
+                .method(method)
+                .headers(requestEntity.getHeaders())
+                .body(requestEntity.getBody())
+                .uriVariables(uriVariables)
+                .timestamp(System.currentTimeMillis())
+                .build();
         Object response = null;
         String responseBodyAsString = null;
         try {
@@ -57,6 +55,13 @@ public class OutgoingCallInterceptor {
             }
             interceptionContext.addRecord(new RequestResponseRecord(interceptedRequest, responseBodyAsString));
         }
+    }
+
+    private boolean validTestRequest(HttpEntity<?> requestEntity) {
+        if (requestEntity == null) {
+            return false;
+        }
+        return requestEntity.getHeaders().getFirst("testStubID") != null;
     }
 
     @After("(@annotation(org.springframework.web.bind.annotation.GetMapping) || " +

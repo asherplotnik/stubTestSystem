@@ -23,7 +23,7 @@ public class DemoService {
 
     public String useService(String transID) {
         HttpHeaders headers = new HttpHeaders();
-        headers.add("X-IDB-TransactionID", transID);
+        headers.add("testStubID", transID);
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
         ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         return response.getBody() != null ? response.getBody() : "No dog found 😢";

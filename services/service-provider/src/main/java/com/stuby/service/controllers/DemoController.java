@@ -24,7 +24,7 @@ public class DemoController {
     }
 
     @GetMapping("/get")
-    public MyDocument get(@RequestParam String id, @RequestHeader("X-IDB-TransactionID") String transID) {
+    public MyDocument get(@RequestParam String id, @RequestHeader("testStubID") String transID) {
         return mongoService.get(id, transID);
     }
 

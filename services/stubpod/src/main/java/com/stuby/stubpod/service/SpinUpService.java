@@ -24,16 +24,11 @@ public class SpinUpService {
 
     public String deployTestPod(String originalServiceName) {
         String namespace = "default";
-
         io.fabric8.kubernetes.api.model.Service originalService = getOriginalService(originalServiceName, namespace);
-
         String image = getORiginalImageString(originalServiceName, originalService, namespace);
-
         Map<String, String> stubLabels = buildStubLabels(originalServiceName, originalService);
         createService(originalServiceName, originalService, namespace, stubLabels);
-
         Pod pod = createPod(originalServiceName, image, namespace, stubLabels);
-
         return "test pod [ " + pod.getMetadata().getName() + " ] created!";
     }
 

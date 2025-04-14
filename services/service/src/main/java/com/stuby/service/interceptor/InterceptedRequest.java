@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 @Getter
 @Setter
 @Builder
