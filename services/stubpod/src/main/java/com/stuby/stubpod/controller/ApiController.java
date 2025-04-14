@@ -1,5 +1,7 @@
 package com.stuby.stubpod.controller;
 
+import com.stuby.stubpod.model.InterceptedRequest;
+import com.stuby.stubpod.service.GetSampleRequestService;
 import com.stuby.stubpod.service.GetServicesService;
 import com.stuby.stubpod.service.SpinUpService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +15,11 @@ public class ApiController {
 
     private final SpinUpService spinUpService;
     private final GetServicesService getServicesService;
-    public ApiController(SpinUpService spinUpService, GetServicesService getServicesService) {
+    private final GetSampleRequestService getSampleRequestService;
+    public ApiController(SpinUpService spinUpService, GetServicesService getServicesService, GetSampleRequestService getSampleRequestService) {
         this.spinUpService = spinUpService;
         this.getServicesService = getServicesService;
+        this.getSampleRequestService = getSampleRequestService;
     }
 
     @GetMapping("/get")
@@ -23,8 +27,13 @@ public class ApiController {
         return getServicesService.getServiceNames();
     }
 
+    @GetMapping("/getSampleRequest")
+    public InterceptedRequest getSampleRequest(String serviceName) {
+        return getSampleRequestService.getRequest(serviceName);
+    }
+
     @GetMapping("/createTestPod")
     public String createTestPod(@RequestParam String name) {
-        return spinUpService.deployStubPod(name);
+        return spinUpService.deployTestPod(name);
     }
 }

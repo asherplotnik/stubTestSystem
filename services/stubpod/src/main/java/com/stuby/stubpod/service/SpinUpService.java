@@ -22,10 +22,10 @@ public class SpinUpService {
         this.kubernetesClient = kubernetesClient;
     }
 
-    public String deployStubPod(String originalServiceName) {
+    public String deployTestPod(String originalServiceName) {
         String namespace = "default";
 
-        Service originalService = getOriginalService(originalServiceName, namespace);
+        io.fabric8.kubernetes.api.model.Service originalService = getOriginalService(originalServiceName, namespace);
 
         String image = getORiginalImageString(originalServiceName, originalService, namespace);
 
@@ -34,7 +34,7 @@ public class SpinUpService {
 
         Pod pod = createPod(originalServiceName, image, namespace, stubLabels);
 
-        return pod.getFullResourceName();
+        return "test pod [ " + pod.getMetadata().getName() + " ] created!";
     }
 
     private Pod createPod(String originalServiceName, String image, String namespace, Map<String, String> labels) {
@@ -52,7 +52,7 @@ public class SpinUpService {
                 .withValue(CLIENT_URL)
                 .endEnv()
                 .addNewPort()
-                .withContainerPort(8080)  // Adjust the port if needed
+                .withContainerPort(8080)
                 .endPort()
                 .endContainer()
                 .endSpec()
