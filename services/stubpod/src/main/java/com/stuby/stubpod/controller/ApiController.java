@@ -1,6 +1,6 @@
 package com.stuby.stubpod.controller;
 
-import com.stuby.stubpod.model.InterceptedRequest;
+import com.stuby.stubpod.model.RequestResponseRecord;
 import com.stuby.stubpod.service.GetSampleRequestService;
 import com.stuby.stubpod.service.GetServicesService;
 import com.stuby.stubpod.service.SpinUpService;
@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -23,12 +26,12 @@ public class ApiController {
     }
 
     @GetMapping("/get")
-    public String getServices() {
-        return getServicesService.getServiceNames();
+    public Map<String, List<RequestResponseRecord>> getServices() {
+        return getServicesService.getServiceWithSampleRequests();
     }
 
     @GetMapping("/getSampleRequest")
-    public InterceptedRequest getSampleRequest(String serviceName) {
+    public List<RequestResponseRecord> getSampleRequest(String serviceName) {
         return getSampleRequestService.getRequest(serviceName);
     }
 

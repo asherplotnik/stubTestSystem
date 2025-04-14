@@ -1,24 +1,30 @@
 package com.stuby.stubpod.service;
 
+import com.stuby.stubpod.model.RequestResponseRecord;
 import io.fabric8.kubernetes.client.KubernetesClient;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 @Service
 public class GetServicesService {
 
+    private final GetSampleRequestService getSampleRequestService;
     private final KubernetesClient kubernetesClient;
-    public GetServicesService(KubernetesClient kubernetesClient) {
+    public GetServicesService(KubernetesClient kubernetesClient, GetSampleRequestService getSampleRequestService) {
+        this.getSampleRequestService = getSampleRequestService;
         this.kubernetesClient = kubernetesClient;
     }
 
-    public String getServiceNames() {
+    public Map<String, List<RequestResponseRecord>> getServiceWithSampleRequests() {
+        Map<String, List<RequestResponseRecord>> mapByServiceName = new HashMap<>();
         List<io.fabric8.kubernetes.api.model.Service> services = kubernetesClient.services().inNamespace("default").list().getItems();
-        return services.stream()
+        services.stream()
                 .map(service -> service.getMetadata().getName())
-                .collect(Collectors.joining(", "));
+                .forEach(service -> mapByServiceName.put(service, getSampleRequestService.getRequest(service)));
+        return mapByServiceName;
     }
 
 }
