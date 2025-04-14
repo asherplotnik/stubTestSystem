@@ -1,0 +1,12 @@
+com\stuby\stubpod\model\InterceptedRequest.class
+com\stuby\stubpod\service\SpinUpService.class
+com\stuby\stubpod\configuration\KubernetesConfig.class
+com\stuby\stubpod\service\GetSampleRequestService.class
+com\stuby\stubpod\service\TestRequestHandler.class
+com\stuby\stubpod\configuration\RestTemplateConfig.class
+com\stuby\stubpod\StubpodApplication.class
+com\stuby\stubpod\service\GetServicesService.class
+com\stuby\stubpod\model\RequestResponseRecord.class
+com\stuby\stubpod\controller\ApiController.class
+com\stuby\stubpod\model\InterceptedRequest$InterceptedRequestBuilder.class
+com\stuby\stubpod\controller\StubController.class

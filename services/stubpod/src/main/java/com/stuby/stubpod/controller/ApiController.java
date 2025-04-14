@@ -31,7 +31,7 @@ public class ApiController {
     }
 
     @GetMapping("/getSampleRequest")
-    public List<RequestResponseRecord> getSampleRequest(String serviceName) {
+    public Map<String, List<RequestResponseRecord>> getSampleRequest(String serviceName) {
         return getSampleRequestService.getRequest(serviceName);
     }
 

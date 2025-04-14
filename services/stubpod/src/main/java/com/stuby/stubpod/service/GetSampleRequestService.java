@@ -1,13 +1,14 @@
 package com.stuby.stubpod.service;
 
-import com.stuby.stubpod.model.InterceptedRequest;
 import com.stuby.stubpod.model.RequestResponseRecord;
 import io.fabric8.kubernetes.client.KubernetesClient;
 import io.fabric8.kubernetes.client.dsl.ServiceResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GetSampleRequestService {
@@ -20,11 +21,13 @@ public class GetSampleRequestService {
         this.restTemplate = restTemplate;
     }
 
-    public List<RequestResponseRecord> getRequest(String serviceName) {
+    public Map<String, List<RequestResponseRecord>> getRequest(String serviceName) {
+        if (serviceName.contains("mongo") || serviceName.contains("stub") ||serviceName.contains("kubernetes")) {
+            return Map.of(serviceName, Collections.emptyList());
+        }
         String url = buildRequestUrl(serviceName);
-         return (List<RequestResponseRecord>)restTemplate.getForObject(url, List.class);
+        return restTemplate.getForObject(url, Map.class);
     }
-
 
 
     private String buildRequestUrl(String originalServiceName) {

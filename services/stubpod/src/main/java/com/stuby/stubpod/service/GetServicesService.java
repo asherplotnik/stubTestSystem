@@ -2,6 +2,7 @@ package com.stuby.stubpod.service;
 
 import com.stuby.stubpod.model.RequestResponseRecord;
 import io.fabric8.kubernetes.client.KubernetesClient;
+import java.util.Collections;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -21,10 +22,23 @@ public class GetServicesService {
     public Map<String, List<RequestResponseRecord>> getServiceWithSampleRequests() {
         Map<String, List<RequestResponseRecord>> mapByServiceName = new HashMap<>();
         List<io.fabric8.kubernetes.api.model.Service> services = kubernetesClient.services().inNamespace("default").list().getItems();
+
         services.stream()
                 .map(service -> service.getMetadata().getName())
-                .forEach(service -> mapByServiceName.put(service, getSampleRequestService.getRequest(service)));
+                .forEach(service -> mapByServiceName.put(service, getRequests(service)));
         return mapByServiceName;
+    }
+
+    private List<RequestResponseRecord> getRequests(String service) {
+        try {
+            var res =  getSampleRequestService.getRequest(service);
+            if (res != null && res.get("data") != null) {
+                return res.get("data");
+            }
+            return Collections.emptyList();
+        } catch (Exception e) {
+            return Collections.emptyList();
+        }
     }
 
 }

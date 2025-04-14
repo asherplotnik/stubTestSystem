@@ -1,0 +1,6 @@
+- open git bash command line in this folder.
+- run commands:
+  chmod +x deploy-all.sh
+  ./deploy-all.sh
+
+
