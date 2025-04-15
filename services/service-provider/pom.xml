@@ -9,7 +9,7 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.stuby</groupId>
-	<artifactId>service</artifactId>
+	<artifactId>service-provider</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>service</name>
 	<description>stub tool for k8s</description>

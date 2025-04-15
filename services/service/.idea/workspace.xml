@@ -5,42 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d11b923a-860e-4465-82d2-303b52835804" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../stubpod/src/main/java/com/stuby/stubpod/repository/StubRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../stubpod/src/main/java/com/stuby/stubpod/repository/entity/StubResponseEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../stubpod/src/main/java/com/stuby/stubpod/service/FetchStubResponseService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../stubpod/src/main/java/com/stuby/stubpod/service/SetStubResponseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../charts/java-demo-chart/values.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../../charts/java-demo-chart/values.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../charts/java-stub-chart/templates/deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../../charts/java-stub-chart/templates/deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../charts/java-stub-chart/values.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../../charts/java-stub-chart/values.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../service-provider/src/main/java/com/stuby/service/controllers/DemoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../service-provider/src/main/java/com/stuby/service/controllers/DemoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../charts/java-demo-chart-provider/Chart.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../../charts/java-demo-chart-provider/Chart.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../charts/java-demo-chart-provider/values.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../../charts/java-demo-chart-provider/values.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-provider/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../service-provider/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-provider/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../service-provider/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-provider/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../service-provider/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-provider/src/main/java/com/stuby/service/ServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../service-provider/src/main/java/com/stuby/service/ServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-provider/target/classes/com/stuby/service/ServiceApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/../service-provider/target/classes/com/stuby/service/ServiceApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-provider/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../service-provider/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-provider/target/service-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-provider/target/service-0.0.1-SNAPSHOT.jar.original" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/stuby/service/controllers/DemoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/stuby/service/controllers/DemoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/stuby/service/interceptor/InterceptedRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/stuby/service/interceptor/InterceptedRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/stuby/service/interceptor/OutgoingCallInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/stuby/service/interceptor/OutgoingCallInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/stuby/service/repository/MongoRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/stuby/service/repository/MongoRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/stuby/service/service/DemoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/stuby/service/service/DemoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/stuby/service/controllers/DemoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/stuby/service/controllers/DemoController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/stuby/service/interceptor/InterceptedRequest$InterceptedRequestBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/stuby/service/interceptor/InterceptedRequest$InterceptedRequestBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/stuby/service/interceptor/InterceptedRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/stuby/service/interceptor/InterceptedRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/stuby/service/interceptor/OutgoingCallInterceptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/stuby/service/interceptor/OutgoingCallInterceptor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/stuby/service/service/DemoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/stuby/service/service/DemoService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/stuby/service/ServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/stuby/service/ServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/stuby/service/ServiceApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/stuby/service/ServiceApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/service-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/service-0.0.1-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/service-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/service-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stubpod/src/main/java/com/stuby/stubpod/controller/ApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/src/main/java/com/stuby/stubpod/controller/ApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stubpod/src/main/java/com/stuby/stubpod/controller/StubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/src/main/java/com/stuby/stubpod/controller/StubController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stubpod/src/main/java/com/stuby/stubpod/service/GetServicesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/src/main/java/com/stuby/stubpod/service/GetServicesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stubpod/src/main/java/com/stuby/stubpod/service/SpinUpService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/src/main/java/com/stuby/stubpod/service/SpinUpService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stubpod/src/main/java/com/stuby/stubpod/service/TestRequestHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stubpod/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stubpod/target/classes/com/stuby/stubpod/controller/ApiController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/target/classes/com/stuby/stubpod/controller/ApiController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stubpod/target/classes/com/stuby/stubpod/controller/StubController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/target/classes/com/stuby/stubpod/controller/StubController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stubpod/target/classes/com/stuby/stubpod/service/GetServicesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/target/classes/com/stuby/stubpod/service/GetServicesService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stubpod/target/classes/com/stuby/stubpod/service/SpinUpService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/target/classes/com/stuby/stubpod/service/SpinUpService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stubpod/target/classes/com/stuby/stubpod/service/TestRequestHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stubpod/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stubpod/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stubpod/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stubpod/src/main/java/com/stuby/stubpod/StubpodApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/src/main/java/com/stuby/stubpod/StubpodApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stubpod/target/classes/com/stuby/stubpod/StubpodApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/target/classes/com/stuby/stubpod/StubpodApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../stubpod/target/stubpod-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/target/stubpod-0.0.1-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../stubpod/target/stubpod-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/target/stubpod-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../stubpod/target/surefire-reports/TEST-com.stuby.stubpod.StubpodApplicationTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../stubpod/target/surefire-reports/TEST-com.stuby.stubpod.StubpodApplicationTests.xml" afterDir="false" />
