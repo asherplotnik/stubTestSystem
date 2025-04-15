@@ -10,6 +10,7 @@ public class GlobalInterceptionStore {
     private final List<RequestResponseRecord> globalRecords = new CopyOnWriteArrayList<>();
 
     public void addRecords(List<RequestResponseRecord> records) {
+        globalRecords.clear();
         globalRecords.addAll(records);
     }
 
