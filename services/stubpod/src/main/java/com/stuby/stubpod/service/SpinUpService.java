@@ -1,10 +1,7 @@
 package com.stuby.stubpod.service;
 
-import io.fabric8.kubernetes.api.model.Pod;
-import io.fabric8.kubernetes.api.model.PodBuilder;
-import io.fabric8.kubernetes.api.model.ServiceBuilder;
+import io.fabric8.kubernetes.api.model.*;
 import io.fabric8.kubernetes.client.KubernetesClient;
-import io.fabric8.kubernetes.api.model.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,18 +14,18 @@ public class SpinUpService {
     private static final String TEST = "-test";
     private static final String CLIENT_URL = "http://java-stub-java-stub-chart:8080/stub";
     private final KubernetesClient kubernetesClient;
+    private static final String NAMESPACE = "default";
 
     public SpinUpService(KubernetesClient kubernetesClient) {
         this.kubernetesClient = kubernetesClient;
     }
 
     public String deployTestPod(String originalServiceName) {
-        String namespace = "default";
-        io.fabric8.kubernetes.api.model.Service originalService = getOriginalService(originalServiceName, namespace);
-        String image = getORiginalImageString(originalServiceName, originalService, namespace);
+        io.fabric8.kubernetes.api.model.Service originalService = getOriginalService(originalServiceName, NAMESPACE);
+        String image = getORiginalImageString(originalServiceName, originalService, NAMESPACE);
         Map<String, String> stubLabels = buildStubLabels(originalServiceName, originalService);
-        createService(originalServiceName, originalService, namespace, stubLabels);
-        Pod pod = createPod(originalServiceName, image, namespace, stubLabels);
+        createService(originalServiceName, originalService, NAMESPACE, stubLabels);
+        Pod pod = createPod(originalServiceName, image, NAMESPACE, stubLabels);
         return "test pod [ " + pod.getMetadata().getName() + " ] created!";
     }
 
@@ -101,5 +98,32 @@ public class SpinUpService {
         stubLabels.put("stub", "true");
         stubLabels.put("app", originalServiceName + TEST);
         return stubLabels;
+    }
+
+    public String deleteTestResource(String resourceName) {
+        if (!resourceName.contains("test")) {
+            return "Deletion forbidden. not a test resource.";
+        }
+        getOriginalService(resourceName,NAMESPACE); //make sure service exists.
+        var podDeleted = kubernetesClient
+                .pods()
+                .inNamespace(NAMESPACE)
+                .withName(resourceName)
+                .withGracePeriod(0)
+                .withPropagationPolicy(DeletionPropagation.FOREGROUND)
+                .delete();
+
+        var serviceDeleted = kubernetesClient
+                .services()
+                .inNamespace(NAMESPACE)
+                .withName(resourceName)
+                .withGracePeriod(0)
+                .withPropagationPolicy(DeletionPropagation.FOREGROUND)
+                .delete();
+        if (podDeleted != null && serviceDeleted != null) {
+            return "Test Pod and Service deleted successfully.";
+        } else {
+            return "Deletion failed for one or more resources.";
+        }
     }
 }

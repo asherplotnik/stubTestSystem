@@ -2,7 +2,6 @@ package com.stuby.stubpod.controller;
 
 import com.stuby.stubpod.model.RequestResponseRecord;
 import com.stuby.stubpod.repository.entity.StubResponseEntity;
-import com.stuby.stubpod.service.GetSampleRequestService;
 import com.stuby.stubpod.service.GetServicesService;
 import com.stuby.stubpod.service.SetStubResponseService;
 import com.stuby.stubpod.service.SpinUpService;
@@ -37,5 +36,10 @@ public class ApiController {
     @GetMapping("/createTestPod")
     public String createTestPod(@RequestParam String name) {
         return spinUpService.deployTestPod(name);
+    }
+
+    @DeleteMapping("/deleteTestResource")
+    public String deleteTestResource(String resourceName) {
+        return spinUpService.deleteTestResource(resourceName);
     }
 }

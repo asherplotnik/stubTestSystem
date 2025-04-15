@@ -1,6 +1,15 @@
+prerequisites:
+ - docker desktop
+ - kind - for creating Kubernetes cluster using docker desktop
+ - helm - for installing charts.
+ - git 
+ 
+
 - open git bash command line in this folder.
 - run commands:
   chmod +x deploy-all.sh
   ./deploy-all.sh
+
+the first deploy take some times to pull all the images. be patient.
 
 
