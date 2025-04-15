@@ -16,7 +16,7 @@ image:
 mongo:
   uri: mongodb://app:apppass123@bitnami-mongodb:27017/mydb?authSource=admin
 client:
-  url: http://java-service-provider-java-demo-chart:8082/api/call
+  url: http://java-service-provider-java-provider-chart:8082/api/call
 
 # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets: []
