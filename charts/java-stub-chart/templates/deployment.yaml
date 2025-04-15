@@ -47,6 +47,8 @@ spec:
           env:
             - name: SPRING_DATA_MONGODB_URI
               value: {{ .Values.mongo.uri }}
+            - name: SPRING_MVC_PATHMATCH_MATCHING_STRATEGY
+              value: ant_path_matcher
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}

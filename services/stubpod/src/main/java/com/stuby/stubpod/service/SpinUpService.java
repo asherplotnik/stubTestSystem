@@ -15,7 +15,7 @@ import java.util.Map;
 public class SpinUpService {
 
     private static final String TEST = "-test";
-    private static final String CLIENT_URL = "http://java-stub-java-demo-chart:8080/stub";
+    private static final String CLIENT_URL = "http://java-stub-java-stub-chart:8080/stub";
     private final KubernetesClient kubernetesClient;
 
     public SpinUpService(KubernetesClient kubernetesClient) {
