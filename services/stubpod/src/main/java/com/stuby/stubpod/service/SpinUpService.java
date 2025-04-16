@@ -21,15 +21,28 @@ public class SpinUpService {
     }
 
     public String deployTestPod(String originalServiceName) {
+        deleteIfTestPodExists(originalServiceName);
         io.fabric8.kubernetes.api.model.Service originalService = getOriginalService(originalServiceName, NAMESPACE);
         String image = getORiginalImageString(originalServiceName, originalService, NAMESPACE);
         Map<String, String> stubLabels = buildStubLabels(originalServiceName, originalService);
-        createService(originalServiceName, originalService, NAMESPACE, stubLabels);
-        Pod pod = createPod(originalServiceName, image, NAMESPACE, stubLabels);
-        return "test pod [ " + pod.getMetadata().getName() + " ] created!";
+        Service service = createService(originalServiceName, originalService, NAMESPACE, stubLabels);
+        createPod(originalServiceName, image, NAMESPACE, stubLabels);
+        return "http://" + service.getMetadata().getName() + ":"+ service.getSpec().getPorts().get(0).getPort();
     }
 
-    private Pod createPod(String originalServiceName, String image, String namespace, Map<String, String> labels) {
+    private void deleteIfTestPodExists(String originalServiceName) {
+        Pod existing = kubernetesClient.pods().inNamespace(NAMESPACE).withName(originalServiceName + TEST).get();
+        if (existing != null) {
+            deleteTestResource(originalServiceName + TEST);
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private void createPod(String originalServiceName, String image, String namespace, Map<String, String> labels) {
         Pod stubPod = new PodBuilder()
                 .withNewMetadata()
                 .withName(originalServiceName + TEST)
@@ -50,10 +63,10 @@ public class SpinUpService {
                 .endSpec()
                 .build();
 
-        return kubernetesClient.resource(stubPod).inNamespace(namespace).create();
+        kubernetesClient.resource(stubPod).inNamespace(namespace).create();
     }
 
-    private void createService(String originalServiceName, Service originalService, String namespace, Map<String, String> stubLabels) {
+    private Service createService(String originalServiceName, Service originalService, String namespace, Map<String, String> stubLabels) {
         Service newService = new ServiceBuilder(originalService)
                 .editMetadata()
                 .withName(originalServiceName + TEST)
@@ -69,7 +82,7 @@ public class SpinUpService {
                 .endPort()
                 .endSpec()
                 .build();
-        kubernetesClient.resource(newService).inNamespace(namespace).create();
+        return kubernetesClient.resource(newService).inNamespace(namespace).create();
     }
 
     private String getORiginalImageString(String originalServiceName, Service originalService, String namespace) {
