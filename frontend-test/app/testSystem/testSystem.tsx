@@ -14,15 +14,14 @@ export function TestSystem() {
     "http://localhost:30082/api/deleteTestResource";
   const generateTestStubID = () => Math.floor(10000 + Math.random() * 90000);
   const [testStubID, setTestStubID] = useState<number | null>(null);
-  const [fetchedRequests, setFetchedRequests] =
-    useState<ServiceResponseMap | null>(null);
+  const [fetchedRequests, setFetchedRequests] = useState<ServiceResponseMap | null>(null);
   const [editResponse, setEditResponse] = useState(false);
   const [currentServiceName, setCurrentServiceName] = useState<string>("");
   const [testResource, setTestResource] = useState<string>("");
   const [isWaiting, setIsWaiting] = useState(false);
-
+  
   interface RequestObject {
-    url: string;
+    path: string;
     method: string;
     headers: {
       [key: string]: string[];
@@ -129,6 +128,7 @@ export function TestSystem() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       await response.text();
+      setTestResource("");
       setCurrentStage(1);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -203,7 +203,7 @@ export function TestSystem() {
                             </h4>
                             <ul className="text-sm text-gray-700 space-y-1">
                               <li>
-                                <strong>URI:</strong> {pair.request.url}
+                                <strong>URI:</strong> {pair.request.path}
                               </li>
                               <li>
                                 <strong>Method:</strong> {pair.request.method}
@@ -217,6 +217,10 @@ export function TestSystem() {
                               <li>
                                 <strong>Headers:</strong> testStubID:{" "}
                                 {pair.request.headers.testStubID?.join(", ")}
+                              </li>
+                              <li>
+                                <strong>Timestamp: </strong>
+                                {pair.request.timestamp}
                               </li>
                             </ul>
                           </div>
@@ -252,7 +256,7 @@ export function TestSystem() {
               Stage 3: Create Test Resource
             </h2>
             <button
-              onClick={() => createTestPod(currentServiceName)}
+              onClick={() => createTestPod()}
               disabled={isWaiting || testResource !== ""}
               className="bg-green-500 hover:bg-green-600 disabled:bg-gray-400 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-2 px-4 rounded mb-4"
             >

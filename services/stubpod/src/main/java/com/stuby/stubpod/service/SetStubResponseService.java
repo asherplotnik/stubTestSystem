@@ -13,11 +13,22 @@ public class SetStubResponseService {
 
     public String setStubResponse(StubResponseEntity stubResponse) {
         try {
-            stubRepository.save(stubResponse);
+            stubRepository.save(createPersistentStubResponse(stubResponse));
             return "Stub Response Saved successfully for service: " + stubResponse.getServiceName();
         } catch (Exception e) {
             return "Stub Response was NOT Saved for service: " + stubResponse.getServiceName();
         }
     }
+
+    private StubResponseEntity createPersistentStubResponse(StubResponseEntity stubResponse) {
+        StubResponseEntity stubResponseEntity = new StubResponseEntity();
+        stubResponseEntity.setStubResponse(stubResponse.getStubResponse());
+        stubResponseEntity.setServiceName(stubResponse.getServiceName());
+        stubResponseEntity.setUniqueId(stubResponse.getUniqueId());
+        return stubResponseEntity;
+    }
+
+
+
 
 }

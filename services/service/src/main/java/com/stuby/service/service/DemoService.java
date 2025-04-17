@@ -7,7 +7,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -25,8 +29,12 @@ public class DemoService {
         HttpHeaders headers = new HttpHeaders();
         headers.add("testStubID", transID);
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
-        ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-        return response.getBody() != null ? response.getBody() : "No dog found 😢";
+        ResponseEntity<String> response1 = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> response2 = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
+        List<ResponseEntity<String>> list = new ArrayList<>();
+        list.add(response1);
+        list.add(response2);
+        return list.get(0) == null && list.get(1) == null ? "No dog found 😢" : list.toString();
     }
 
 }

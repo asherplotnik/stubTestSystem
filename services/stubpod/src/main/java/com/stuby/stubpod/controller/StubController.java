@@ -14,7 +14,7 @@ public class StubController {
         this.service = service;
     }
 
-    @RequestMapping(value = {"/**/stub", "/**/stub/**"})
+    @RequestMapping({"/stub", "/stub/**"})
     public String testRequest(HttpServletRequest request) {
         return service.fetchStubResponse(request);
     }

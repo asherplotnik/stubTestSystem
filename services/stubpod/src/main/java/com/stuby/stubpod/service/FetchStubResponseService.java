@@ -14,8 +14,8 @@ public class FetchStubResponseService {
     }
 
     public String fetchStubResponse(HttpServletRequest request) {
-        String testStubId = request.getHeader("testStubId");
-        return stubRepository.findById(testStubId)
+
+        return stubRepository.findById(request.getHeader("requestHash"))
                 .map(StubResponseEntity::getStubResponse)
                 .orElse(null);
     }

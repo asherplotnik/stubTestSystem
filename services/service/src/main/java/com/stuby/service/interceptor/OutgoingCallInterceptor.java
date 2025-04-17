@@ -1,14 +1,23 @@
 package com.stuby.service.interceptor;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import java.io.UncheckedIOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Aspect
 @Component
@@ -27,24 +36,32 @@ public class OutgoingCallInterceptor {
         Object[] args = joinPoint.getArgs();
 
         String url = args.length > 0 && args[0] instanceof String urlArgs? urlArgs : null;
+        String pathAndQuery = getPathAndQuery(url);
+
         String method = args.length > 1 ? args[1].toString() : null;
         HttpEntity<?> requestEntity = args.length > 2 && args[2] instanceof HttpEntity ? (HttpEntity<?>) args[2] : null;
-        Object[] uriVariables = args.length > 4 ? Arrays.copyOfRange(args, 4, args.length) : new Object[0];
         if (!validTestRequest(requestEntity)) {
             return joinPoint.proceed();
         }
         var interceptedRequest = InterceptedRequest.builder()
-                .url(url)
+                .path(pathAndQuery)
                 .method(method)
                 .headers(requestEntity.getHeaders())
-                .body(requestEntity.getBody())
-                .uriVariables(uriVariables)
+                .bodyAsString(requestEntity.getBody() != null ? requestEntity.getBody().toString() : null)
                 .timestamp(System.currentTimeMillis())
                 .build();
+
+        String requestHash = buildUniqueId(interceptedRequest);
+        HttpHeaders newHeaders = new HttpHeaders();
+        newHeaders.putAll(requestEntity.getHeaders());
+        newHeaders.add("requestHash", requestHash);
+        args[2] = new HttpEntity<>(requestEntity.getBody(), newHeaders);
+        interceptedRequest.setHeaders(newHeaders);
+
         Object response = null;
         String responseBodyAsString = null;
         try {
-            response = joinPoint.proceed();
+            response = joinPoint.proceed(args);
             return response;
         } finally {
             if(response instanceof ResponseEntity) {
@@ -55,6 +72,33 @@ public class OutgoingCallInterceptor {
             }
             interceptionContext.addRecord(new RequestResponseRecord(interceptedRequest, responseBodyAsString));
         }
+    }
+
+    private String getPathAndQuery(String url) {
+        try {
+            URI uri = new URI(url);
+            String path = uri.getRawPath();
+            String query = uri.getRawQuery();
+            String result = path + (query != null ? "?" + query : "");
+            if (result.startsWith("/stub/")) {
+                result = result.substring("/stub".length());
+            } else if ("/stub".equals(result)) {
+                result = "/";
+            }
+            return result;
+        } catch (URISyntaxException e) {
+            return url;
+        }
+    }
+
+    public static String buildUniqueId(InterceptedRequest request) {
+        StringBuilder keyString = new StringBuilder()
+                .append(request.getHeaders().get("testStubID")).append("\n")
+                .append(request.getPath()).append("\n")
+                .append(request.getMethod()).append("\n")
+                .append(request.getBodyAsString()).append("\n");
+        int hash = keyString.toString().hashCode();
+        return Integer.toHexString(hash);
     }
 
     private boolean validTestRequest(HttpEntity<?> requestEntity) {

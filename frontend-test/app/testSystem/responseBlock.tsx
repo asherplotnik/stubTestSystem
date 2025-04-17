@@ -39,8 +39,9 @@ const ResponseBlock: React.FC<PairBlockProps> = ({
   }, [pair.response]);
 
   const setStubResponse = async (
-    testStubId: string,
+    uniqueId: string,
     serviceName: string,
+    request: RequestObject,
     stubResponse: string
   ): Promise<any> => {
     try {
@@ -50,12 +51,12 @@ const ResponseBlock: React.FC<PairBlockProps> = ({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          testStubId,
-          serviceName,
-          stubResponse,
+           uniqueId,
+           serviceName,
+           request,
+           stubResponse
         }),
       });
-  
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -69,7 +70,12 @@ const ResponseBlock: React.FC<PairBlockProps> = ({
   const saveEditedResponse = () => {
     try {
       JSON.parse(responseValue);
-      setStubResponse(pair.request.headers?.testStubID[0], serviceName, responseValue);
+      setStubResponse(
+        pair.request.headers.requestHash[0],
+        serviceName, 
+        pair.request,
+        responseValue, 
+      );
     } catch (error) {
       console.error("Invalid JSON format:", error);
       return;

@@ -1,5 +1,6 @@
 package com.stuby.stubpod.repository.entity;
 
+import com.stuby.stubpod.model.InterceptedRequest;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -10,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "Stubs")
 public class StubResponseEntity {
     @Id
-    String testStubId;
+    String uniqueId;
     String serviceName;
     String stubResponse;
 }

@@ -10,20 +10,18 @@ import org.springframework.http.HttpHeaders;
 @Builder
 @ToString
 public class InterceptedRequest {
-    private String url;
+    private String path;
     private String method;
     private HttpHeaders headers;
-    private Object body;
-    private Object[] uriVariables;
+    private String bodyAsString;
     private long timestamp;
 
 
-    public InterceptedRequest(String url, String method, HttpHeaders headers, Object body, Object[] uriVariables, long timestamp) {
-        this.url = url;
+    public InterceptedRequest(String path, String method, HttpHeaders headers, String bodyAsString, long timestamp) {
+        this.path = path;
         this.method = method;
         this.headers = headers;
-        this.body = body;
-        this.uriVariables = uriVariables;
+        this.bodyAsString = bodyAsString;
         this.timestamp = timestamp;
     }
 }
