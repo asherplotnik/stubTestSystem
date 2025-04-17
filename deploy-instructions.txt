@@ -10,6 +10,6 @@ prerequisites:
   chmod +x deploy-all.sh
   ./deploy-all.sh
 
-the first deploy take some times to pull all the images. be patient.
+the first deploy take some time to pull all the images. be patient.
 
 
