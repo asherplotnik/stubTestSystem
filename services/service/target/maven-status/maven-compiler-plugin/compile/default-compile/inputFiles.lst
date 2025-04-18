@@ -1,4 +1,6 @@
 C:\Users\asher\git\kubernetes\services\service\src\main\java\com\stuby\service\config\RestTemplateConfig.java
+C:\Users\asher\git\kubernetes\services\service\src\main\java\com\stuby\service\config\WebClientConfig.java
+C:\Users\asher\git\kubernetes\services\service\src\main\java\com\stuby\service\config\WebClientFilterConfig.java
 C:\Users\asher\git\kubernetes\services\service\src\main\java\com\stuby\service\controllers\DemoController.java
 C:\Users\asher\git\kubernetes\services\service\src\main\java\com\stuby\service\interceptor\GlobalInterceptionStore.java
 C:\Users\asher\git\kubernetes\services\service\src\main\java\com\stuby\service\interceptor\InterceptedRequest.java

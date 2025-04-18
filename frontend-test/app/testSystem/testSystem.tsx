@@ -128,8 +128,8 @@ export function TestSystem() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       await response.text();
-      setTestResource("");
-      setCurrentStage(1);
+      window.location.reload();
+    
     } catch (error) {
       console.error("Error fetching data:", error);
       throw error;

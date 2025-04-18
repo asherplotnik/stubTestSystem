@@ -3,21 +3,24 @@ package com.stuby.service.interceptor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
 public class InterceptionContext {
-    private final ThreadLocal<List<RequestResponseRecord>> records = ThreadLocal.withInitial(ArrayList::new);
+    private final List<RequestResponseRecord> records = Collections.synchronizedList(new ArrayList<>());
 
     public List<RequestResponseRecord> getRecords() {
-        return records.get();
+        synchronized (records) {
+            return new ArrayList<>(records);
+        }
     }
 
     public void addRecord(RequestResponseRecord record) {
-        records.get().add(record);
+        records.add(record);
     }
 
     public void clear() {
-        records.remove();
+        records.clear();
     }
 }
