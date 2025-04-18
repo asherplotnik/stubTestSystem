@@ -1,45 +1,40 @@
 import React, { useEffect, useState } from "react";
 import ResponseBlock from "./responseBlock";
+import GlobalResource from "~/utility/GlobalResource";
+
+export interface RequestObject {
+  path: string;
+  method: string;
+  headers: {
+    [key: string]: string[];
+  };
+  body: any;
+  uriVariables: any[];
+  timestamp: number;
+}
+
+export interface RequestResponsePair {
+  request: RequestObject;
+  response: string;
+}
+
+export interface ServiceResponseMap {
+  [service: string]: RequestResponsePair[];
+}
 
 export function TestSystem() {
   const [currentStage, setCurrentStage] = useState(1);
-  const API_GET_SERVICES_URI =
-    import.meta.env.VITE_API_GET_SERVICES_URI ||
-    "http://localhost:30082/api/get";
-  const API_CREATE_TEST_RESOURCE =
-    import.meta.env.VITE_API_CREATE_TEST_RESOURCE ||
-    "http://localhost:30082/api/createTestPod";
-  const API_DELETE_TEST_RESOURCE =
-    import.meta.env.VITE_API_DELETE_TEST_RESOURCE ||
-    "http://localhost:30082/api/deleteTestResource";
+  const API_GET_SERVICES_URI = GlobalResource.GET_SERVICES_URI || "http://localhost:30082/api/get";
+  const API_CREATE_TEST_RESOURCE = GlobalResource.CREATE_TEST_POD_URI || "http://localhost:30082/api/createTestPod";
+  const API_DELETE_TEST_RESOURCE = GlobalResource.DELETE_TEST_POD_URI || "http://localhost:30082/api/deleteTestResource";
   const generateTestStubID = () => Math.floor(10000 + Math.random() * 90000);
   const [testStubID, setTestStubID] = useState<number | null>(null);
   const [fetchedRequests, setFetchedRequests] = useState<ServiceResponseMap | null>(null);
-  const [editResponse, setEditResponse] = useState(false);
+  const [editResponse, setEditResponse] = useState<boolean[]>([]);
   const [currentServiceName, setCurrentServiceName] = useState<string>("");
   const [testResource, setTestResource] = useState<string>("");
   const [isWaiting, setIsWaiting] = useState(false);
   
-  interface RequestObject {
-    path: string;
-    method: string;
-    headers: {
-      [key: string]: string[];
-    };
-    body: any;
-    uriVariables: any[];
-    timestamp: number;
-  }
-
-  interface RequestResponsePair {
-    request: RequestObject;
-    response: string;
-  }
-
-  interface ServiceResponseMap {
-    [service: string]: RequestResponsePair[];
-  }
-
   useEffect(() => {
     setTestStubID(generateTestStubID());
   }, []);
@@ -55,8 +50,13 @@ export function TestSystem() {
     }
   }, [currentStage, fetchedRequests]);
 
-  const toggleEditResponse = () => {
-    setEditResponse((prevState) => !prevState);
+  const toggleEditResponse = (index:number) => {
+    setEditResponse(prev => {
+      if (!prev) return prev;       
+      const next = [...prev];       
+      next[index] = !next[index];   
+      return next;
+    });
   };
 
   const fetchRequests = async (): Promise<ServiceResponseMap> => {
@@ -73,6 +73,8 @@ export function TestSystem() {
       }
       const data = (await response.json()) as ServiceResponseMap;
       setFetchedRequests(data);
+      const [[, entries]] = Object.entries(data);
+      setEditResponse(createEditResponseArray(entries.length));
       setCurrentStage(2);
       return data;
     } catch (error) {
@@ -80,6 +82,11 @@ export function TestSystem() {
       throw error;
     }
   };
+
+  const createEditResponseArray = (num: number): boolean[] => {
+    return new Array<boolean>(num).fill(false);
+  }
+    
 
   const createTestPod = async () => {
     try {
@@ -227,11 +234,12 @@ export function TestSystem() {
                           {/* Response Data */}
                           <ResponseBlock
                             key={index}
+                            idx={index }
                             pair={pair}
                             serviceName={serviceName}
                             editResponse={editResponse}
                             setEditResponse={setEditResponse}
-                            toggleEditResponse={toggleEditResponse}
+                            toggleEditResponse={()=> toggleEditResponse(index)}
                           />
                         </div>
                       ))}

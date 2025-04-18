@@ -1,29 +1,20 @@
 import React, { useState, useEffect } from "react";
-interface RequestObject {
-  url: string;
-  method: string;
-  headers: {
-    [key: string]: string[];
-  };
-  body: any;
-  uriVariables: any[];
-  timestamp: number;
-}
+import GlobalResource from "~/utility/GlobalResource";
+import type { RequestObject, RequestResponsePair } from "./testSystem";
 
-interface RequestResponsePair {
-  request: RequestObject;
-  response: string;
-}
+
 
 interface PairBlockProps {
+  idx: number;
   pair: RequestResponsePair;
   serviceName: string;
-  toggleEditResponse: () => void;
-  editResponse: boolean;
-  setEditResponse: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleEditResponse: () => void | null;
+  editResponse: boolean[];
+  setEditResponse: React.Dispatch<React.SetStateAction<boolean[]>>;
 }
 
 const ResponseBlock: React.FC<PairBlockProps> = ({
+  idx,
   pair,
   serviceName,
   toggleEditResponse,
@@ -31,7 +22,7 @@ const ResponseBlock: React.FC<PairBlockProps> = ({
   setEditResponse,
 }) => {
   const [responseValue, setResponseValue] = useState<string>(pair.response);
-  const SET_RESPOSNE_URI = import.meta.env.VITE_API_SET_RESPOSNE_URI || "http://localhost:30082/api/setStubResponse";
+  const SET_RESPOSNE_URI = GlobalResource.SET_RESPONSE_URI || "http://localhost:30082/api/setStubResponse";
   useEffect(() => {
     if (pair.response !== responseValue) {
       setResponseValue(pair.response);
@@ -67,7 +58,7 @@ const ResponseBlock: React.FC<PairBlockProps> = ({
     }
   };
   
-  const saveEditedResponse = () => {
+  const saveEditedResponse = (idx:number) => {
     try {
       JSON.parse(responseValue);
       setStubResponse(
@@ -80,12 +71,17 @@ const ResponseBlock: React.FC<PairBlockProps> = ({
       console.error("Invalid JSON format:", error);
       return;
     }
-    setEditResponse(false);
+    setEditResponse(prev => {
+      if (!prev) return prev;
+      let next = [...prev];
+      next[idx] = false;
+      return next;
+    });
   };
 
   return (
     <div>
-      {editResponse ? (
+      {editResponse[idx] ? (
         <div>
           {/* Editable Response Section */}
           <div className="bg-gray-50 p-4 rounded shadow">
@@ -94,12 +90,12 @@ const ResponseBlock: React.FC<PairBlockProps> = ({
               className="w-full p-2 border rounded text-sm text-gray-700"
               value={responseValue}
               onChange={(e) => setResponseValue(e.target.value)}
-              rows={10} // adjust rows as needed
+              rows={10}
             />
           </div>
           <div className="mt-4">
             <button
-              onClick={() => saveEditedResponse()}
+              onClick={() => saveEditedResponse(idx)}
               className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded mr-2"
             >
               Save Response
