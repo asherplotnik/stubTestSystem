@@ -33,6 +33,7 @@ Repository Structure
 
 my-k8s-project/
 
+```
 ├── README.md
 ├── deploy-all.sh               # Script to deploy the entire system
 ├── kind-config.yaml            # Kind cluster configuration (with extra port mappings)
@@ -48,6 +49,7 @@ my-k8s-project/
 │   └── java-stub-service/              # Stub service code
 └── docs/
     └── deployment-instructions.md      # Additional deployment notes
+```
 
 Prerequisites
 
