@@ -1,4 +1,3 @@
-com\stuby\stubpod\model\InterceptedRequest.class
 com\stuby\stubpod\service\SpinUpService.class
 com\stuby\stubpod\configuration\KubernetesConfig.class
 com\stuby\stubpod\service\GetSampleRequestService.class
@@ -11,5 +10,4 @@ com\stuby\stubpod\service\FetchStubResponseService.class
 com\stuby\stubpod\repository\entity\StubResponseEntity.class
 com\stuby\stubpod\model\RequestResponseRecord.class
 com\stuby\stubpod\controller\ApiController.class
-com\stuby\stubpod\model\InterceptedRequest$InterceptedRequestBuilder.class
 com\stuby\stubpod\controller\StubController.class

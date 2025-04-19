@@ -1,5 +1,7 @@
 package com.stuby.stubpod.model;
 
+import com.stuby.service.interceptor.InterceptedRequest;
+
 public class RequestResponseRecord {
     private final InterceptedRequest request;
     private final String response;

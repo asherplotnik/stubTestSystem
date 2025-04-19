@@ -2,7 +2,6 @@ C:\Users\asher\git\kubernetes\services\stubpod\src\main\java\com\stuby\stubpod\c
 C:\Users\asher\git\kubernetes\services\stubpod\src\main\java\com\stuby\stubpod\configuration\RestTemplateConfig.java
 C:\Users\asher\git\kubernetes\services\stubpod\src\main\java\com\stuby\stubpod\controller\ApiController.java
 C:\Users\asher\git\kubernetes\services\stubpod\src\main\java\com\stuby\stubpod\controller\StubController.java
-C:\Users\asher\git\kubernetes\services\stubpod\src\main\java\com\stuby\stubpod\model\InterceptedRequest.java
 C:\Users\asher\git\kubernetes\services\stubpod\src\main\java\com\stuby\stubpod\model\RequestResponseRecord.java
 C:\Users\asher\git\kubernetes\services\stubpod\src\main\java\com\stuby\stubpod\repository\entity\StubResponseEntity.java
 C:\Users\asher\git\kubernetes\services\stubpod\src\main\java\com\stuby\stubpod\repository\StubRepository.java

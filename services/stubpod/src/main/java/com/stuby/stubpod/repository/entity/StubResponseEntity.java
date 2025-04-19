@@ -1,6 +1,5 @@
 package com.stuby.stubpod.repository.entity;
 
-import com.stuby.stubpod.model.InterceptedRequest;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
