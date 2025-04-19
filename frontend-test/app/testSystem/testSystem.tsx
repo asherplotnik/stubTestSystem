@@ -24,9 +24,9 @@ export interface ServiceResponseMap {
 
 export function TestSystem() {
   const [currentStage, setCurrentStage] = useState(1);
-  const API_GET_SERVICES_URI = GlobalResource.GET_SERVICES_URI || "http://localhost:30082/api/get";
-  const API_CREATE_TEST_RESOURCE = GlobalResource.CREATE_TEST_POD_URI || "http://localhost:30082/api/createTestPod";
-  const API_DELETE_TEST_RESOURCE = GlobalResource.DELETE_TEST_POD_URI || "http://localhost:30082/api/deleteTestResource";
+  const API_GET_SERVICES_URI = GlobalResource.GET_SERVICES_URI;
+  const API_CREATE_TEST_RESOURCE = GlobalResource.CREATE_TEST_POD_URI;
+  const API_DELETE_TEST_RESOURCE = GlobalResource.DELETE_TEST_POD_URI;
   const generateTestStubID = () => Math.floor(10000 + Math.random() * 90000);
   const [testStubID, setTestStubID] = useState<number | null>(null);
   const [fetchedRequests, setFetchedRequests] = useState<ServiceResponseMap | null>(null);
@@ -36,6 +36,7 @@ export function TestSystem() {
   const [isWaiting, setIsWaiting] = useState(false);
   
   useEffect(() => {
+    console.log(import.meta.env.MODE);
     setTestStubID(generateTestStubID());
   }, []);
 
@@ -61,6 +62,7 @@ export function TestSystem() {
 
   const fetchRequests = async (): Promise<ServiceResponseMap> => {
     try {
+      console.log(API_GET_SERVICES_URI);
       const response = await fetch(API_GET_SERVICES_URI, {
         method: "GET",
         headers: {

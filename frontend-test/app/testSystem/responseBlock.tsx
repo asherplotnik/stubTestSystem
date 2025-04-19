@@ -22,7 +22,7 @@ const ResponseBlock: React.FC<PairBlockProps> = ({
   setEditResponse,
 }) => {
   const [responseValue, setResponseValue] = useState<string>(pair.response);
-  const SET_RESPOSNE_URI = GlobalResource.SET_RESPONSE_URI || "http://localhost:30082/api/setStubResponse";
+  const SET_RESPOSNE_URI = GlobalResource.SET_RESPONSE_URI;
   useEffect(() => {
     if (pair.response !== responseValue) {
       setResponseValue(pair.response);
