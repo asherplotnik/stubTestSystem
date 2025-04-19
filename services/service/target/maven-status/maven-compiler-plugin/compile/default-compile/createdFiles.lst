@@ -5,13 +5,14 @@ com\stuby\service\config\RestTemplateConfig.class
 com\stuby\service\config\WebClientConfig.class
 com\stuby\service\interceptor\InterceptedRequest.class
 com\stuby\service\interceptor\OutgoingCallInterceptor.class
-com\stuby\service\config\WebClientFilterConfig.class
 com\stuby\service\service\DemoService.class
 com\stuby\service\service\MongoService.class
 com\stuby\service\interceptor\InterceptedRequest$InterceptedRequestBuilder.class
 com\stuby\service\interceptor\InterceptionContext.class
+com\stuby\service\interceptor\WebClientFilterConfig.class
 com\stuby\service\repository\MyDocument.class
 com\stuby\service\repository\MongoRepo.class
 com\stuby\service\interceptor\GlobalInterceptionStore.class
 com\stuby\service\interceptor\RequestResponseRecord.class
+com\stuby\service\interceptor\WebClientFilterPostProcessor.class
 com\stuby\service\ServiceApplication.class

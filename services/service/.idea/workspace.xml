@@ -5,10 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d11b923a-860e-4465-82d2-303b52835804" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../frontend-test/app/.env.development" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend-test/app/.env.development" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend-test/app/.env.production" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend-test/app/.env.production" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend-test/app/testSystem/responseBlock.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend-test/app/testSystem/responseBlock.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend-test/app/testSystem/testSystem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend-test/app/testSystem/testSystem.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/stuby/service/interceptor/WebClientFilterPostProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/stuby/service/config/WebClientConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/stuby/service/config/WebClientConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/stuby/service/config/WebClientFilterConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/stuby/service/interceptor/WebClientFilterConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/stuby/service/config/WebClientFilterConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/service-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/service-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/service-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/service-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
