@@ -27,6 +27,10 @@ helm install java-service-provider ./charts/java-demo-chart-provider
 echo "Deploying TestStubSystem application..."
 helm install java-stub ./charts/java-stub-chart
 
+# Deploy the TestStubSystem fronend
+echo "Deploying TestStubSystem frontend..."
+helm install frontend ./charts/frontend-chart
+
 
 # Show deployments and services
 echo "Current cluster state:"
